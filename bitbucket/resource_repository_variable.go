@@ -56,6 +56,11 @@ func resourceRepositoryVariable() *schema.Resource {
 				Optional: true,
 				Default:  false,
 			},
+			"always_override": {
+				Type:     schema.TypeBool,
+				Optional: true,
+				Default:  true,
+			},
 			"repository": {
 				Type:     schema.TypeString,
 				Required: true,
@@ -134,7 +139,7 @@ func resourceRepositoryVariableRead(d *schema.ResourceData, m interface{}) error
 		d.Set("key", rv.Key)
 		d.Set("secured", rv.Secured)
 		switch {
-		case rv.Secured:
+		case rv.Secured && !d.Get("always_override").(bool):
 			v := d.Get("value").(string)
 			h := d.Get("hash").(string)
 			if hashValue(v) != h {
