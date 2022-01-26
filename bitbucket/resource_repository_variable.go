@@ -2,7 +2,7 @@ package bitbucket
 
 import (
 	"bytes"
-	"crypto/md5"
+	"crypto/sha256"
 	"encoding/json"
 	"fmt"
 	"io/ioutil"
@@ -13,7 +13,7 @@ import (
 )
 
 func hashValue(v string) string {
-	b := md5.Sum([]byte(v))
+	b := sha256.Sum256([]byte(v))
 	return fmt.Sprintf("%x", b)
 }
 
