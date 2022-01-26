@@ -14,20 +14,20 @@ This resource allows you to configure deployment variables.
 # Example Usage
 
 ```hcl
-resource "bitbucket_repository" "monorepo" {
-    owner = "gob"
-    name = "illusions"
+resource "bitbucket_repository" "example" {
+    owner = "workspace"
+    name = "example-repository"
     pipelines_enabled = true
 }
-resource "bitbucket_deployment" "test" {
-  repository = bitbucket_repository.monorepo.id
+resource "bitbucket_deployment" "example" {
+  repository = bitbucket_repository.example.id
   name = "test"
   stage = "Test"
 }
-resource "bitbucket_deployment_variable" "country" {
+resource "bitbucket_deployment_variable" "example" {
   deployment = bitbucket_deployment.test.id
-  name = "COUNTRY"
-  value = "Kenya"
+  name = "EXAMPLE_VARIABLE"
+  value = "thisisanexample"
   secured = false
 }
 ```
@@ -38,4 +38,5 @@ resource "bitbucket_deployment_variable" "country" {
 * `name` - (Required) The name of the variable
 * `value` - (Required) The stage (Test, Staging, Production)
 * `secured` - (Optional) Boolean indicating whether the variable contains sensitive data
+* `always_override` - (Optional) If true secured variables will always be overridden, if false remote changes will be ignored but changed from terraform will still be applied
 * `uuid` - (Computed) The UUID of the variable

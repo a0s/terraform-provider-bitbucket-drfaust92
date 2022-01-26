@@ -14,16 +14,16 @@ This resource allows you to setup pipelines variables to manage your builds with
 # Example Usage
 
 ```hcl
-resource "bitbucket_repository" "monorepo" {
-    owner = "gob"
-    name = "illusions"
+resource "bitbucket_repository" "example" {
+    owner = "workspace"
+    name = "example-repository"
     pipelines_enable = true
 }
 
-resource "bitbucket_repository_variable" "debug" {
-    key = "DEBUG"
-    value = "true"
-    repository = "${bitbucket_repository.monorepo.id}"
+resource "bitbucket_repository_variable" "example" {
+    key = "EXAMPLE_VARIABLE"
+    value = "thisisanexample"
+    repository = "${bitbucket_repository.example.id}"
     secured = false
 }
 ```
@@ -34,5 +34,5 @@ resource "bitbucket_repository_variable" "debug" {
 * `value` - (Required) The value of the key
 * `repository` - (Required) The repository ID you want to put this variable onto.
 * `secured` - (Optional) If you want to make this viewable in the UI.
-
+* `always_override` - (Optional) If true secured variables will always be overridden, if false remote changes will be ignored but changed from terraform will still be applied
 * `uuid` - (Computed) The UUID of the variable
