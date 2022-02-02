@@ -1,3 +1,15 @@
+## 2.5.0 (January 26, 2022)
+
+### Features
+* repository variable values are now sensitive
+* add `always_override` repository variable value 
+* add `always_override` deployment variable value
+
+---
+ History 1.3.0 to 2.5.0 is unknown
+
+---
+
 ## 1.3.0 (March 15, 2021)
 
 This release contains the changes to upstream repo that were never released.
